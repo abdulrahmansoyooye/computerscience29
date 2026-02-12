@@ -2,7 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { allMaterialsQuery, featuredMaterialsQuery } from "@/sanity/lib/queries";
 import Navbar from "@/components/layout/Navbar";
 import MaterialCard from "@/components/shared/MaterialCard";
-import { Book, Stars, ArrowRight, Filter, Bookmark, GraduationCap, Zap, Clock } from "lucide-react";
+import { Book, Stars, ArrowRight, Filter, Bookmark, GraduationCap, Zap, Clock, User } from "lucide-react";
 import Link from "next/link";
 import { getUser } from "@/lib/auth";
 
@@ -66,28 +66,25 @@ export default async function Home() {
                   Your Digital Academic Vault
                 </div>
                 <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-[0.95] tracking-tight">
-                  Modern Learning <br />
-                  <span className="text-blue-400">Simplified.</span>
+                  Master Your CS Degree <br />
+                  <span className="text-blue-400">with Precision.</span>
                 </h1>
                 <p className="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
-                  The ultimate repository for CSC29 students. High-quality lecture notes, past exams, and exclusive resources in one beautiful place.
+                  Access high-quality lecture notes, past questions, and lab manuals curated specifically for Computer Science students at csc29.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                   <Link href="/materials" className="w-full sm:w-auto px-10 py-5 rounded-2xl bg-white text-slate-900 font-black hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 shadow-xl">
-                    Explore Library <ArrowRight size={20} />
+                    Browse All <ArrowRight size={20} />
                   </Link>
                   <div className="flex items-center gap-4 px-6 py-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
                     <div className="flex -space-x-3">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="w-10 h-10 rounded-full border-2 border-slate-900 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center text-[10px] font-bold">
-                          {String.fromCharCode(64 + i)}
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="w-10 h-10 rounded-full border-2 border-slate-900 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+                          <User size={14} className="text-slate-400" />
                         </div>
                       ))}
                     </div>
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-white tracking-wide">TRUSTED BY</span>
-                      <span className="text-[10px] text-slate-400 font-medium uppercase">500+ CSC Students</span>
-                    </div>
+                    <span className="text-sm font-bold text-white tracking-wide">Join 500+ students</span>
                   </div>
                 </div>
               </div>

@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { GraduationCap, BookOpen, Search, User, LogOut, Menu, X, Bell, Bookmark } from "lucide-react";
+import { GraduationCap, BookOpen, Search, User, LogOut, Menu, X, Bell, Bookmark, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -12,6 +13,12 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [matricNumber, setMatricNumber] = useState<string | null>(null);
+    const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -62,7 +69,7 @@ export default function Navbar() {
                             >
                                 <GraduationCap size={22} strokeWidth={2.5} />
                             </motion.div>
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
+                            <span className="bg-clip-text text-transparent bg-linear-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
                                 CSC29
                             </span>
                         </Link>
@@ -82,9 +89,10 @@ export default function Navbar() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="hidden sm:flex p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
                         >
-                            <Search size={22} />
+                            {mounted && (theme === "dark" ? <Sun size={22} /> : <Moon size={22} />)}
                         </motion.button>
 
                         <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-800" />

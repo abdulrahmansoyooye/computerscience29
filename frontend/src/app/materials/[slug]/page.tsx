@@ -79,9 +79,7 @@ export default async function MaterialPage({ params }: { params: Promise<{ slug:
                         <div className="flex flex-wrap items-center gap-4 pt-4">
                             {material.fileUrl ? (
                                 <a
-                                    href={material.fileUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                    href={`${material.fileUrl}?dl=`}
                                     className="flex items-center gap-3 px-10 py-5 rounded-[2rem] bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black tracking-widest uppercase hover:scale-105 transition-all shadow-2xl active:scale-95 group"
                                 >
                                     <Download size={20} strokeWidth={2.5} className="group-hover:translate-y-0.5 transition-transform" />
