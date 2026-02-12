@@ -26,6 +26,7 @@ export const featuredMaterialsQuery = groq`*[_type == "material" && isFeatured =
 export const materialBySlugQuery = groq`*[_type == "material" && slug.current == $slug][0] {
   _id,
   title,
+  slug,
   description,
   content,
   _createdAt,

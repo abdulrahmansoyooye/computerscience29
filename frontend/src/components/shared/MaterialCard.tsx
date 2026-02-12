@@ -3,6 +3,7 @@
 import { useBookmarks } from "@/hooks/useBookmarks";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { format } from "date-fns";
 import { FileText, Clock, Tag, ChevronRight, Bookmark } from "lucide-react";
 
 interface MaterialCardProps {
@@ -30,8 +31,8 @@ export default function MaterialCard({ material }: MaterialCardProps) {
             type: "material",
             title: material.title,
             slug: material.slug.current,
-            courseCode: material.course.code,
-            category: material.category.name,
+            courseCode: material.course?.code || "N/A",
+            category: material.category?.name || "Uncategorized",
             date: material._createdAt
         });
     };
@@ -58,10 +59,10 @@ export default function MaterialCard({ material }: MaterialCardProps) {
 
                     <div className="flex flex-col items-end gap-1.5">
                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">
-                            {material.course.code}
+                            {material.course?.code || "N/A"}
                         </span>
-                        <span className="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[9px] font-black uppercase tracking-[0.1em] border border-blue-100 dark:border-blue-900/30">
-                            {material.category.name}
+                        <span className="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[9px] font-black uppercase tracking-widest border border-blue-100 dark:border-blue-900/30">
+                            {material.category?.name || "General"}
                         </span>
                     </div>
                 </div>
@@ -80,11 +81,11 @@ export default function MaterialCard({ material }: MaterialCardProps) {
                     <div className="flex items-center gap-4 text-[11px] text-slate-400 font-bold uppercase tracking-wider">
                         <span className="flex items-center gap-1.5">
                             <Clock size={12} className="text-slate-300 dark:text-slate-600" />
-                            {new Date(material._createdAt).toLocaleDateString()}
+                            {format(new Date(material._createdAt), "MMM d, yyyy")}
                         </span>
                         <span className="flex items-center gap-1.5">
                             <Tag size={12} className="text-slate-300 dark:text-slate-600" />
-                            {material.level.name}
+                            {material.level?.name || "All Levels"}
                         </span>
                     </div>
 

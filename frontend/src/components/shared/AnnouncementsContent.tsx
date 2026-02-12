@@ -3,6 +3,7 @@
 import { Info, Calendar, ChevronRight, AlertCircle, CheckCircle2, Megaphone, Stars, Bookmark } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useBookmarks } from "@/hooks/useBookmarks";
+import { format } from "date-fns";
 
 export default function AnnouncementsContent({ initialAnnouncements }: { initialAnnouncements: any[] }) {
     const { toggleBookmark, isBookmarked } = useBookmarks();
@@ -66,8 +67,8 @@ export default function AnnouncementsContent({ initialAnnouncements }: { initial
                                                 date: item.date
                                             })}
                                             className={`p-3 rounded-2xl border transition-all ${active
-                                                    ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/20"
-                                                    : "bg-slate-50 dark:bg-slate-800 text-slate-400 border-slate-100 dark:border-slate-700 hover:border-blue-500/50"
+                                                ? "bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/20"
+                                                : "bg-slate-50 dark:bg-slate-800 text-slate-400 border-slate-100 dark:border-slate-700 hover:border-blue-500/50"
                                                 }`}
                                         >
                                             <Bookmark size={18} fill={active ? "white" : "none"} />
@@ -77,7 +78,7 @@ export default function AnnouncementsContent({ initialAnnouncements }: { initial
                                     <div className="flex-1 space-y-4">
                                         <div className="flex flex-wrap items-center gap-4">
                                             <span className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                                                <Calendar size={14} /> {new Date(item.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                                                <Calendar size={14} /> {format(new Date(item.date), 'MMMM d, yyyy')}
                                             </span>
                                             <div className="flex items-center gap-2">
                                                 <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${item.type === 'warning' ? 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-900/30' :

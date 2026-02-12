@@ -6,12 +6,13 @@ import Link from "next/link";
 import PortableText from "react-portable-text";
 import { notFound } from "next/navigation";
 import BookmarkButton from "@/components/shared/BookmarkButton";
+import { format } from "date-fns";
 
 async function getMaterial(slug: string) {
     return await client.fetch(materialBySlugQuery, { slug });
 }
 
-export default async function MaterialPage({ params }: { params: { slug: string } }) {
+export default async function MaterialPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const material = await getMaterial(slug);
 
@@ -58,7 +59,7 @@ export default async function MaterialPage({ params }: { params: { slug: string 
                             <div className="flex flex-wrap items-center gap-6 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest text-[11px]">
                                 <div className="flex items-center gap-2">
                                     <Calendar size={14} className="text-blue-500" />
-                                    Last Updated: {new Date(material._createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                    Last Updated: {format(new Date(material._createdAt), 'MMM d, yyyy')}
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <BookOpen size={14} className="text-indigo-500" />
